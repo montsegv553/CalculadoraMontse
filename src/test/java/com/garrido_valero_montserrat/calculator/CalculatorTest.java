@@ -1,8 +1,10 @@
-package com.houarizegai.calculator;
+package com.garrido_valero_montserrat.calculator;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+
+import com.garrido_valero_montserrat.calculator.Calculator;
 
 class CalculatorTest {
 

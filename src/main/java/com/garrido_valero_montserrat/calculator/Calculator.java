@@ -1,4 +1,4 @@
-package com.houarizegai.calculator;
+package com.garrido_valero_montserrat.calculator;
 
 import java.awt.Cursor;
 import java.awt.Font;
@@ -19,7 +19,7 @@ public class Calculator {
     private static final int MARGIN_X = 20;
     private static final int MARGIN_Y = 60;
 
-    private JFrame window; // Main window
+    private JFrame ventana; // Main window
     private JComboBox<String> comboCalcType, comboTheme;
     private JTextField inText; // Input
     private JButton btnC, btnBack, btnMod, btnDiv, btnMul, btnSub, btnAdd,
@@ -68,9 +68,9 @@ public class Calculator {
     */
 
     public Calculator() {
-        window = new JFrame("Calculator");
-        window.setSize(WINDOW_WIDTH, WINDOW_HEIGHT);
-        window.setLocationRelativeTo(null); // Move window to center
+        ventana = new JFrame("Calculator");
+        ventana.setSize(WINDOW_WIDTH, WINDOW_HEIGHT);
+        ventana.setLocationRelativeTo(null); // Move window to center
 
         comboTheme = initCombo(new String[]{"Simple", "Colored"}, 230, 30, "Theme", themeSwitchEventConsumer);
 
@@ -84,7 +84,7 @@ public class Calculator {
         inText.setEditable(false);
         inText.setBackground(Color.WHITE);
         inText.setFont(new Font("Comic Sans MS", Font.PLAIN, 33));
-        window.add(inText);
+        ventana.add(inText);
 
         btnC = initBtn("C", x[0], y[1], event -> {
             repaintFont();
@@ -111,7 +111,7 @@ public class Calculator {
             repaintFont();
             if (Pattern.matches("([-]?\\d+[.]\\d*)|(\\d+)", inText.getText()))
                 if (go) {
-                    val = calc(val, inText.getText(), opt);
+                    val = calc(val, inText.getText(), opt, 0f);
                     if (Pattern.matches("[-]?[\\d]+[.][0]*", String.valueOf(val))) {
                         inText.setText(String.valueOf((int) val));
                     } else {
@@ -127,7 +127,7 @@ public class Calculator {
             repaintFont();
             if (Pattern.matches("([-]?\\d+[.]\\d*)|(\\d+)", inText.getText()))
                 if (go) {
-                    val = calc(val, inText.getText(), opt);
+                    val = calc(val, inText.getText(), opt, 0f);
                     if (Pattern.matches("[-]?[\\d]+[.][0]*", String.valueOf(val))) {
                         inText.setText(String.valueOf((int) val));
                     } else {
@@ -190,7 +190,7 @@ public class Calculator {
             repaintFont();
             if (Pattern.matches("([-]?\\d+[.]\\d*)|(\\d+)", inText.getText()))
                 if (go) {
-                    val = calc(val, inText.getText(), opt);
+                    val = calc(val, inText.getText(), opt, 0f);
                     if (Pattern.matches("[-]?[\\d]+[.][0]*", String.valueOf(val))) {
                         inText.setText(String.valueOf((int) val));
                     } else {
@@ -253,7 +253,7 @@ public class Calculator {
             repaintFont();
             if (Pattern.matches("([-]?\\d+[.]\\d*)|(\\d+)", inText.getText()))
                 if (go) {
-                    val = calc(val, inText.getText(), opt);
+                    val = calc(val, inText.getText(), opt, 0f);
                     if (Pattern.matches("[-]?[\\d]+[.][0]*", String.valueOf(val))) {
                         inText.setText(String.valueOf((int) val));
                     } else {
@@ -317,7 +317,7 @@ public class Calculator {
             repaintFont();
             if (Pattern.matches("([-]?\\d+[.]\\d*)|(\\d+)", inText.getText()))
                 if (go) {
-                    val = calc(val, inText.getText(), opt);
+                    val = calc(val, inText.getText(), opt, 0f);
                     if (Pattern.matches("[-]?[\\d]+[.][0]*", String.valueOf(val))) {
                         inText.setText(String.valueOf((int) val));
                     } else {
@@ -362,7 +362,7 @@ public class Calculator {
         btnEqual = initBtn("=", x[2], y[5], event -> {
             if (Pattern.matches("([-]?\\d+[.]\\d*)|(\\d+)", inText.getText()))
                 if (go) {
-                    val = calc(val, inText.getText(), opt);
+                    val = calc(val, inText.getText(), opt, 0f);
                     if (Pattern.matches("[-]?[\\d]+[.][0]*", String.valueOf(val))) {
                         inText.setText(String.valueOf((int) val));
                     } else {
@@ -393,7 +393,7 @@ public class Calculator {
             repaintFont();
             if (Pattern.matches("([-]?\\d+[.]\\d*)|(\\d+)", inText.getText()))
                 if (go) {
-                    val = calc(val, inText.getText(), opt);
+                    val = calc(val, inText.getText(), opt, 0f);
                     if (Pattern.matches("[-]?[\\d]+[.][0]*", String.valueOf(val))) {
                         inText.setText(String.valueOf((int) val));
                     } else {
@@ -424,10 +424,10 @@ public class Calculator {
         });
         btnLog.setVisible(false);
 
-        window.setLayout(null);
-        window.setResizable(false);
-        window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); // Close button clicked? = End The process
-        window.setVisible(true);
+        ventana.setLayout(null);
+        ventana.setResizable(false);
+        ventana.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); // Close button clicked? = End The process
+        ventana.setVisible(true);
     }
 
     private JComboBox<String> initCombo(String[] items, int x, int y, String toolTip, Consumer consumerEvent) {
@@ -436,7 +436,7 @@ public class Calculator {
         combo.setToolTipText(toolTip);
         combo.setCursor(new Cursor(Cursor.HAND_CURSOR));
         combo.addItemListener(consumerEvent::accept);
-        window.add(combo);
+        ventana.add(combo);
 
         return combo;
     }
@@ -447,12 +447,12 @@ public class Calculator {
         btn.setFont(new Font("Comic Sans MS", Font.PLAIN, 28));
         btn.setCursor(new Cursor(Cursor.HAND_CURSOR));
         btn.addActionListener(event);
-        window.add(btn);
+        ventana.add(btn);
 
         return btn;
     }
 
-    public double calc(double x, String input, char opt) {
+    public double calc(double x, String input, char opt, float cantidad) {
         inText.setFont(inText.getFont().deriveFont(Font.PLAIN));
         double y = Double.parseDouble(input);
         switch (opt) {
@@ -484,13 +484,13 @@ public class Calculator {
         String selectedItem = (String) event.getItem();
         switch (selectedItem) {
             case "Standard":
-                window.setSize(WINDOW_WIDTH, WINDOW_HEIGHT);
+                ventana.setSize(WINDOW_WIDTH, WINDOW_HEIGHT);
                 btnRoot.setVisible(false);
                 btnPower.setVisible(false);
                 btnLog.setVisible(false);
                 break;
             case "Scientific":
-                window.setSize(WINDOW_WIDTH + 80, WINDOW_HEIGHT);
+                ventana.setSize(WINDOW_WIDTH + 80, WINDOW_HEIGHT);
                 btnRoot.setVisible(true);
                 btnPower.setVisible(true);
                 btnLog.setVisible(true);
@@ -577,8 +577,18 @@ public class Calculator {
                 break;
         }
     };
+    
+    public JFrame getVentana() {
+		return ventana;
+	}
 
-    public static void main(String[] args) {
+	public void setVentana(JFrame ventana) {
+		this.ventana = ventana;
+	}
+	
+	
+
+	public static void main(String[] args) {
         new Calculator();
     }
 }
