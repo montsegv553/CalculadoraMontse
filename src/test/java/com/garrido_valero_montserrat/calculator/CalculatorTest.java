@@ -24,12 +24,12 @@ class CalculatorTest {
         String second = "5";
 
         try {
-            Assertions.assertEquals(8, calculator.calc(first, second, '+'));
-            Assertions.assertEquals(-2, calculator.calc(first, second, '-'));
-            Assertions.assertEquals(15, calculator.calc(first, second, '*'));
-            Assertions.assertEquals(0.6, calculator.calc(first, second, '/'));
-            Assertions.assertEquals(3d, calculator.calc(first, second, '%'));
-            Assertions.assertEquals(243, calculator.calc(first, second, '^'));
+            Assertions.assertEquals(8, calculator.calc(first, second, '+', 0f));
+            Assertions.assertEquals(-2, calculator.calc(first, second, '-', 0f));
+            Assertions.assertEquals(15, calculator.calc(first, second, '*', 0f));
+            Assertions.assertEquals(0.6, calculator.calc(first, second, '/', 0f));
+            Assertions.assertEquals(3d, calculator.calc(first, second, '%', 0f));
+            Assertions.assertEquals(243, calculator.calc(first, second, '^', 0f));
         } catch (Exception e) {
             e.printStackTrace();
         }
