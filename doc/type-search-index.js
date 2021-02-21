@@ -1,0 +1,1 @@
+typeSearchIndex = [{"l":"All Classes","u":"allclasses-index.html"},{"p":"com.garrido_valero_montserrat.calculator","l":"Calculator"}];updateSearchResults();

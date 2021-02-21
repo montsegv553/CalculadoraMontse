@@ -10,6 +10,12 @@ import java.awt.Color;
 import javax.swing.*;
 import java.lang.Math;
 
+/**
+ * Esta clase contiene todos los atributos de la calculadora
+ * @author Montse Garrido Valero
+ *
+ */
+
 public class Calculator {
 
     private static final int WINDOW_WIDTH = 410;

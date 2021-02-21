@@ -1,0 +1,1 @@
+packageSearchIndex = [{"l":"All Packages","u":"allpackages-index.html"},{"l":"com.garrido_valero_montserrat.calculator"}];updateSearchResults();
